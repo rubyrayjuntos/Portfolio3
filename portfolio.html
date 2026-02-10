@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray Swan // Trinity Knowledge Graph</title>
+    <link rel="stylesheet" href="css/portfolio.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="boot-screen">
+        <div class="boot-line" id="boot-1">&gt; INICIANDO_TRINIDAD_V1...</div>
+        <div class="boot-line" id="boot-2">&gt; VERIFICANDO_GRADOS_DE_LIBERTAD...</div>
+        <div class="boot-line" id="boot-3">&gt; CALIBRANDO_SENTIMIENTO_MOLECULAR...</div>
+        <div class="boot-line" id="boot-4">&gt; EJECUTAR SISTEMA SOLAR!</div>
+    </div>
+
+    <div id="ui-layer">
+        <div class="hud-text">SISTEMA: <span class="hud-value">Portfolio of Ray Swan</span></div>
+        <div class="hud-text">NÚCLEO: <span class="hud-value" id="node-count">0</span></div>
+        <div class="hud-text">GRAVEDAD: <span class="hud-value">Discovery DRIVEN</span></div>
+    </div>
+
+    <div id="category-toggles">
+        <button class="cat-toggle active" data-category="code" aria-label="Toggle code projects">CODE</button>
+        <button class="cat-toggle active" data-category="art" aria-label="Toggle art projects">ART</button>
+        <button class="cat-toggle active" data-category="writing" aria-label="Toggle writing projects">WRITING</button>
+    </div>
+
+    <div id="top-nav">
+        <button id="about-btn" class="nav-btn" onclick="openAboutModal()" aria-label="About">ABOUT</button>
+        <button id="contact-btn" class="nav-btn" onclick="openContactModal()" aria-label="Contact">CONTACT</button>
+    </div>
+
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()" aria-label="Toggle music">
+        <span class="music-icon">♪</span>
+        <span class="music-label">SOUND ON</span>
+    </button>
+
+    <div id="info-card">
+        <h2 id="card-title">PROJECT_TITLE</h2>
+        <p id="card-desc">Description load...</p>
+        <div id="card-tags"></div>
+    </div>
+
+    <!-- PROJECT PREVIEW CARD -->
+    <div id="project-preview">
+        <div class="preview-inner">
+            <div class="preview-hero">
+                <img id="preview-img" src="" alt="">
+                <div class="preview-hero-gradient"></div>
+                <button class="preview-close" onclick="closePreview()">&times;</button>
+            </div>
+            <div class="preview-body">
+                <div>
+                    <div class="preview-meta">
+                        <span id="preview-medium"></span>
+                        <span class="dot">&bull;</span>
+                        <span id="preview-year"></span>
+                        <span class="dot">&bull;</span>
+                        <span class="status" id="preview-status"></span>
+                    </div>
+                    <h3 class="preview-title" id="preview-title"></h3>
+                </div>
+                <p class="preview-desc" id="preview-desc"></p>
+                <div class="preview-tags" id="preview-tech-tags"></div>
+                <div class="preview-tags" id="preview-genre-tags"></div>
+                <button class="preview-cta" id="preview-cta" onclick="openModalFromPreview()">View Full Archive</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT MODAL -->
+    <div id="about-modal" class="modal-overlay" onclick="if(event.target===this)closeAboutModal()">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 class="modal-title">About Ray Swan</h2>
+                <button class="modal-close" onclick="closeAboutModal()" aria-label="Close about modal">&times;</button>
+            </div>
+            <div class="modal-content-scroll">
+                <div class="modal-body">
+                    <div class="about-grid">
+                        <div>
+                            <h3 class="about-subtitle">Mystical Technologist</h3>
+                            <p class="about-text">
+                                Ray Swan bridges the worlds of technology and spirituality, creating systems that reveal 
+                                deeper patterns and connections. With expertise spanning full-stack development, 
+                                creative writing, and digital art, Ray approaches each project as an opportunity 
+                                to explore the sacred within the technical.
+                            </p>
+                            <p class="about-text">
+                                This knowledge graph portfolio represents more than just a collection of work—it's 
+                                an invitation to "get down into the gravity of it all," exploring the interconnected 
+                                nature of creative expression across different mediums.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="about-subtitle">Cross-Domain Expertise</h3>
+                            <div class="expertise-list">
+                                <div class="expertise-item">
+                                    <div class="expertise-dot" style="background-color: #ee82ee;"></div>
+                                    <div>
+                                        <div class="expertise-title">Code Systems</div>
+                                        <div class="expertise-desc">Full-stack development, AI integration, cloud architecture</div>
+                                    </div>
+                                </div>
+                                <div class="expertise-item">
+                                    <div class="expertise-dot" style="background-color: #00ffff;"></div>
+                                    <div>
+                                        <div class="expertise-title">Art Visions</div>
+                                        <div class="expertise-desc">Digital art, 3D visualization, interactive experiences</div>
+                                    </div>
+                                </div>
+                                <div class="expertise-item">
+                                    <div class="expertise-dot" style="background-color: #ffbf00;"></div>
+                                    <div>
+                                        <div class="expertise-title">Writing Words</div>
+                                        <div class="expertise-desc">Technical documentation, creative fiction, philosophical exploration</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3 class="about-subtitle">Philosophy & Approach</h3>
+                        <div class="philosophy-grid">
+                            <div class="philosophy-item">
+                                <h4 class="philosophy-title">Pattern Recognition</h4>
+                                <p class="philosophy-text">
+                                    Every project reveals universal patterns that connect across domains. 
+                                    The same principles that govern elegant code also create compelling narratives 
+                                    and beautiful visual compositions.
+                                </p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h4 class="philosophy-title">Sacred Technology</h4>
+                                <p class="philosophy-text">
+                                    Technology becomes a spiritual practice when approached with intention and reverence. 
+                                    Each system built is an opportunity to create something that serves and elevates.
+                                </p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h4 class="philosophy-title">Archetypal Storytelling</h4>
+                                <p class="philosophy-text">
+                                    Stories carry the deepest truths. Whether in code comments, user interfaces, 
+                                    or creative fiction, every piece of work tells a story that resonates with 
+                                    universal human experiences.
+                                </p>
+                            </div>
+                            <div class="philosophy-item">
+                                <h4 class="philosophy-title">Bridge Building</h4>
+                                <p class="philosophy-text">
+                                    The most meaningful work happens at the intersections—between technical and creative, 
+                                    logical and intuitive, individual and collective. Building bridges creates new possibilities.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-section">
+                        <h3 class="about-subtitle">Current Focus</h3>
+                        <p class="about-text">
+                            Currently exploring the intersection of AI and creative expression, building systems 
+                            that amplify human creativity rather than replace it. Recent work includes developing 
+                            immersive portfolio experiences, AI-assisted creative tools, and platforms that help 
+                            people discover deeper patterns in their own creative work.
+                        </p>
+                        <p class="about-text">
+                            Always interested in collaborations that push the boundaries of what's possible 
+                            when technology serves the highest human aspirations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div id="contact-modal" class="modal-overlay" onclick="if(event.target===this)closeContactModal()">
+        <div class="modal-container" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 class="modal-title">Connect & Collaborate</h2>
+                <button class="modal-close" onclick="closeContactModal()" aria-label="Close contact modal">&times;</button>
+            </div>
+            <div class="modal-content-scroll">
+                <div class="modal-body contact-body">
+                    <div class="contact-column">
+                        <h3 class="contact-subtitle">Get In Touch</h3>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-method-content">
+                                    <div class="contact-icon">✉️</div>
+                                    <div>
+                                        <div class="contact-label">Email</div>
+                                        <div class="contact-value">ray@rayswanfoundation.org</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn secondary-btn" onclick="copyToClipboard('ray@rayswanfoundation.org', this)">COPY</button>
+                                    <button class="contact-btn primary-btn" onclick="window.open('mailto:ray@rayswanfoundation.org', '_blank')">OPEN</button>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-method-content">
+                                    <div class="contact-icon">🔗</div>
+                                    <div>
+                                        <div class="contact-label">LinkedIn</div>
+                                        <div class="contact-value">linkedin.com/in/rayswantech</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn secondary-btn" onclick="copyToClipboard('https://linkedin.com/in/rayswantech', this)">COPY</button>
+                                    <button class="contact-btn primary-btn" onclick="window.open('https://linkedin.com/in/rayswantech', '_blank')">OPEN</button>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-method-content">
+                                    <div class="contact-icon">🔗</div>
+                                    <div>
+                                        <div class="contact-label">GitHub</div>
+                                        <div class="contact-value">github.com/rayswantech</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn secondary-btn" onclick="copyToClipboard('https://github.com/rayswantech', this)">COPY</button>
+                                    <button class="contact-btn primary-btn" onclick="window.open('https://github.com/rayswantech', '_blank')">OPEN</button>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-method-content">
+                                    <div class="contact-icon">🔗</div>
+                                    <div>
+                                        <div class="contact-label">Portfolio Site</div>
+                                        <div class="contact-value">rayswanfoundation.org</div>
+                                    </div>
+                                </div>
+                                <div class="contact-actions">
+                                    <button class="contact-btn secondary-btn" onclick="copyToClipboard('https://rayswanfoundation.org', this)">COPY</button>
+                                    <button class="contact-btn primary-btn" onclick="window.open('https://rayswanfoundation.org', '_blank')">OPEN</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-section">
+                            <h4 class="resume-title">📄 Resume & Portfolio</h4>
+                            <p class="resume-text">
+                                Comprehensive portfolio and technical resume available upon request.
+                            </p>
+                            <button class="request-btn" onclick="window.open('mailto:ray@rayswanfoundation.org?subject=Portfolio%20Request', '_blank')">
+                                REQUEST PORTFOLIO →
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="contact-column">
+                        <h3 class="contact-subtitle">Collaboration Interests</h3>
+                        <div class="collaboration-areas">
+                            <div class="collaboration-area">
+                                <h4 class="collab-title">AI & Creative Tools</h4>
+                                <p class="collab-desc">Building systems that amplify human creativity</p>
+                                <div class="collab-tags">
+                                    <span class="collab-tag">Machine Learning</span>
+                                    <span class="collab-tag">Creative AI</span>
+                                    <span class="collab-tag">Human-Computer Interaction</span>
+                                </div>
+                            </div>
+
+                            <div class="collaboration-area">
+                                <h4 class="collab-title">Immersive Experiences</h4>
+                                <p class="collab-desc">Interactive portfolios and storytelling platforms</p>
+                                <div class="collab-tags">
+                                    <span class="collab-tag">3D Visualization</span>
+                                    <span class="collab-tag">WebGL</span>
+                                    <span class="collab-tag">Interactive Design</span>
+                                </div>
+                            </div>
+
+                            <div class="collaboration-area">
+                                <h4 class="collab-title">Knowledge Systems</h4>
+                                <p class="collab-desc">Platforms for discovering patterns and connections</p>
+                                <div class="collab-tags">
+                                    <span class="collab-tag">Graph Databases</span>
+                                    <span class="collab-tag">Data Visualization</span>
+                                    <span class="collab-tag">Information Architecture</span>
+                                </div>
+                            </div>
+
+                            <div class="collaboration-area">
+                                <h4 class="collab-title">Spiritual Technology</h4>
+                                <p class="collab-desc">Technology that serves higher human purposes</p>
+                                <div class="collab-tags">
+                                    <span class="collab-tag">Ethical AI</span>
+                                    <span class="collab-tag">Mindful Design</span>
+                                    <span class="collab-tag">Purpose-Driven Development</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="collab-cta">
+                            <h4 class="collab-cta-title">Open to Opportunities</h4>
+                            <p class="collab-cta-text">
+                                Always interested in projects that push creative and technical boundaries. 
+                                Whether it's a startup, established company, or creative collective, 
+                                let's explore what we can build together.
+                            </p>
+                            <div class="collab-buttons">
+                                <button class="collab-btn primary" onclick="window.open('mailto:ray@rayswanfoundation.org?subject=Collaboration%20Opportunity', '_blank')">
+                                    START CONVERSATION
+                                </button>
+                                <button class="collab-btn secondary" onclick="window.open('https://calendly.com/rayswantech', '_blank')">
+                                    SCHEDULE CALL
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT MODAL -->
+    <div id="project-modal" onclick="if(event.target===this)closeModal()">
+        <div class="modal-inner" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-hero">
+                <img id="modal-hero-img" src="" alt="">
+                <div class="modal-hero-gradient"></div>
+                <div class="modal-hero-content">
+                    <div class="modal-hero-meta">
+                        <span class="modal-hero-badge" id="modal-badge"></span>
+                        <span class="modal-hero-year" id="modal-year"></span>
+                    </div>
+                    <h2 class="modal-hero-title" id="modal-title"></h2>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="overview" onclick="switchTab('overview')">
+                        <span class="tab-icon">&#128203;</span><span class="tab-label">Overview</span>
+                    </button>
+                    <button class="modal-tab" data-tab="experience" onclick="switchTab('experience')">
+                        <span class="tab-icon">&#10024;</span><span class="tab-label">Experience</span>
+                    </button>
+                    <button class="modal-tab" data-tab="process" onclick="switchTab('process')">
+                        <span class="tab-icon">&#128260;</span><span class="tab-label">Process</span>
+                    </button>
+                    <button class="modal-tab" data-tab="connections" onclick="switchTab('connections')">
+                        <span class="tab-icon">&#128279;</span><span class="tab-label">Connections</span>
+                    </button>
+                </div>
+                <div class="tab-panel active" id="tab-overview"></div>
+                <div class="tab-panel" id="tab-experience"></div>
+                <div class="tab-panel" id="tab-process"></div>
+                <div class="tab-panel" id="tab-connections"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    
+</body>
+</html>
